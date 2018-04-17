@@ -300,13 +300,14 @@ def genHuahen(srcDir,dstDir):
             image=cv2.imread(filePath)
             h = image.shape[0]
             w = image.shape[1]
-            for x in range(10,w-30-w_hh,20):
-                for y in range(10,h-30-h_hh,20):
+            for x in range(10,w-40-w_hh,30):
+                for y in range(10,h-40-h_hh,30):
                     image_new = image.copy()
                     for x_hh in range(0,h_hh):
                         for y_hh in range(0,w_hh):
                             if image_hh[x_hh,y_hh,0] < 176:
                                 image_new[x+x_hh,y+y_hh] = image_hh[x_hh,y_hh]
+                    image_new = cv2.GaussianBlur(image_new,(3,3),0)
                     cv2.imwrite(dstDir+shortname+"_human_"+str(x)+"_"+str(y)+extension, image_new)
 
         
