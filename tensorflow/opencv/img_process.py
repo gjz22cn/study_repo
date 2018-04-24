@@ -870,3 +870,19 @@ def addRotatePicForTrainDir(trainPath):
         addRoatedPicForDir(src_dir,180)
 
 #addRotatePicForTrainDir("./../opencv/data_0419/")
+
+image = cv2.imread('1.jpg')
+gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0)
+sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1)
+sobelx = np.uint8(np.absolute(sobelx))
+sobely = np.uint8(np.absolute(sobely))
+sobelcombine = cv2.bitwise_or(sobelx,sobely)
+ret,th1=cv2.threshold(sobelcombine,85,255,cv2.THRESH_BINARY)
+cv2.imshow('result', np.hstack([th,sobelcombine]))
+if(cv2.waitkey(0)==27):
+    cv2.destroyAllWindows()
+
+
+
+
